@@ -14,5 +14,6 @@ El propósito de la práctica integradora es aplicar los temas vistos en clase, 
 # Set Up
 En terminal del VS Code ejecutar el siguiente comando para descargar las dependencias del proyecto antes de empezar a trabajar.
 ```sh
+flutter clean
 flutter packages get
 ```
