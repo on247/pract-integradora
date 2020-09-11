@@ -21,6 +21,7 @@ class _HomeState extends State<Home> {
             icon: Icon(Icons.person),
             onPressed: () {
               Navigator.of(context).push(
+                // TODO: Eliminar este boton y adaptar todo el contenido de la pagina de perfil en un Drawer aqui en la pantalla Home
                 MaterialPageRoute(builder: (_) => Profile()),
               );
             },
@@ -76,7 +77,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  void _openCupsPage() {
+  void _openDessertPage() {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (context) => null),
     );
