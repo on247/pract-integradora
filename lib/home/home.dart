@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:estructura_practica_1/home/item_home.dart';
 import 'package:estructura_practica_1/profile.dart';
+import 'package:estructura_practica_1/models/product_repository.dart';
+import 'package:estructura_practica_1/drinks/hot_drinks_page.dart';
 
 class Home extends StatefulWidget {
   final String title;
@@ -52,12 +54,12 @@ class _HomeState extends State<Home> {
   }
 
   void _openHotDrinksPage() {
-    // TODO: completar en navigator pasando los parametros a la pagina de HotDrinksPage
-
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) {
-          return null;
+          return HotDrinksPage(
+            drinksList: ProductRepository.loadProducts(ProductType.BEBIDAS),
+          );
         },
       ),
     );
