@@ -11,7 +11,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: APP_TITLE,
       theme: ThemeData(
-        primarySwatch: PRIMARY_COLOR,
+        primaryColor: PRIMARY_COLOR,
+        cardColor: ITEM_BACKGROUND,
+        textTheme: Theme.of(context).textTheme.copyWith(
+              headline4: Theme.of(context).textTheme.headline4.copyWith(
+                    color: PRIMARY_TEXT,
+                  ),
+              headline5: Theme.of(context).textTheme.headline5.copyWith(
+                    color: ITEM_TEXT,
+                  ),
+            ),
       ),
       home: Home(title: APP_TITLE),
     );
