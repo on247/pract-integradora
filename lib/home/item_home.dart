@@ -1,3 +1,4 @@
+import 'package:estructura_practica_1/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class ItemHome extends StatelessWidget {
@@ -20,42 +21,25 @@ class ItemHome extends StatelessWidget {
             child: Card(
               elevation: 4.0,
               margin: EdgeInsets.all(24.0),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              color: Colors.indigo,
               child: Container(height: 180),
             ),
           ),
           Container(
             height: 160,
             margin: EdgeInsets.only(top: 28, bottom: 24, left: 24, right: 24),
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.all(
-                Radius.circular(30),
-              ),
-            ),
             child: Row(
               children: [
                 Container(
                   margin: EdgeInsets.only(left: 16),
                   width: 160,
-                  decoration: BoxDecoration(
-                    color: Colors.yellow[300],
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(30),
-                    ),
-                  ),
                   child: Padding(
-                    padding: const EdgeInsets.all(24.0),
+                    padding: const EdgeInsets.all(16.0),
                     child: Text(
                       "$title",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline5
-                          .copyWith(fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.headline5.copyWith(
+                            color: PRIMARY_TEXT,
+                            fontWeight: FontWeight.bold,
+                          ),
                     ),
                   ),
                 ),

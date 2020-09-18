@@ -65,6 +65,8 @@ class _HomeState extends State<Home> {
     );
   }
 
+  //TODO : Agregar las demas paginas y gesture detector
+
   void _openGrainsPage() {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (context) => null),
