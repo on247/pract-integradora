@@ -20,7 +20,7 @@ class _ItemGrainsState extends State<ItemGrains> {
       child: Padding(
         padding: const EdgeInsets.fromLTRB(30, 16, 30, 16),
         child: SizedBox(
-          height: MediaQuery.of(context).size.height / 4,
+          height: MediaQuery.of(context).size.height / 3.5,
           child: Container(
             decoration: BoxDecoration(
               boxShadow: [
@@ -52,6 +52,13 @@ class _ItemGrainsState extends State<ItemGrains> {
                                 Text(
                                   "${widget.grain.productTitle}",
                                   style: Theme.of(context).textTheme.headline5,
+                                ),
+                                Text(
+                                  widget.grain.productWeight ==
+                                          ProductWeight.KILO
+                                      ? '1 kg'
+                                      : '250 gr',
+                                  style: Theme.of(context).textTheme.headline6,
                                 ),
                                 Expanded(child: Container()),
                                 Padding(
