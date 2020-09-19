@@ -1,29 +1,26 @@
 import 'package:estructura_practica_1/models/product_hot_drinks.dart';
 import 'package:estructura_practica_1/models/product_grains.dart';
-import 'package:estructura_practica_1/models/product_dessert.dart';
+import 'package:estructura_practica_1/models/product_desserts.dart';
 
 enum ProductType { BEBIDAS, GRANO, POSTRES }
 
 class ProductRepository {
   static List<dynamic> loadProducts(ProductType prodType) {
     // ----------------------              ----------------------------//
-    // ----------------------       Tazas      ----------------------------//
+    // ----------------------       Postres     ----------------------------//
     // ----------------------              ----------------------------//
 
-    //if (prodType == ProductType.POSTRES) {
-    // TODO: Agregar al menos 5 productos "postres"
-    //}
     if (prodType == ProductType.POSTRES)
-      return <ProductDessert>[
-        ProductDessert(
+      return <ProductDesserts>[
+        ProductDesserts(
           productTitle: "Pay de limon",
           productSize: DessertSize.CH,
           productDescription: "Pay de limon con galletas maria, receta clasica",
           productImage:
-              "https://cocinamuyfacil.com/wp-content/uploads/pastel_limon-2.jpg",
+              "http://cocinamuyfacil.com/wp-content/uploads/pastel_limon-2.jpg",
           productAmount: 0,
         ),
-        ProductDessert(
+        ProductDesserts(
           productTitle: "Gelatina de yogurt",
           productSize: DessertSize.CH,
           productDescription: "Gelatina de yogurt con salsa de fresa",
@@ -31,31 +28,31 @@ class ProductRepository {
               "https://cdn.shopify.com/s/files/1/0276/1493/7159/products/gelatina-delicia-de-yogurt-sin-azucar-grande-01_1800x1800.jpg",
           productAmount: 0,
         ),
-        ProductDessert(
+        ProductDesserts(
           productTitle: "Gelatina de frutas",
           productSize: DessertSize.CH,
           productDescription:
               "Una explosión de frutas naturales: fresas, uvas, guayabas y duraznos.",
           productImage:
-              "https://cdn.shopify.com/s/files/1/0276/1493/7159/products/gelatina-suspiro-de-frutas-grande-01_371518cd-e957-4ba9-869e-534a030dd647_1800x1800.jpg?v=1593104690",
+              "https://cdn.shopify.com/s/files/1/0276/1493/7159/products/gelatina-suspiro-de-frutas-grande-01_371518cd-e957-4ba9-869e-534a030dd647_1800x1800.jpg",
           productAmount: 0,
         ),
-        ProductDessert(
+        ProductDesserts(
           productTitle: "Pastel de zanahoria",
           productSize: DessertSize.CH,
           productDescription:
               "Pan casero de zanahoria con nueces y cálidas especias, cubierto con suave betún de queso crema y decorado con trazos en forma de zanahorias.",
           productImage:
-              "https://cdn.shopify.com/s/files/1/0276/1493/7159/products/pastel-zanahoria-grande-01_11db4b12-79cd-4838-aa51-d09d3dd11d92_1800x1800.jpg?v=1592870597",
+              "http://cdn.shopify.com/s/files/1/0276/1493/7159/products/pastel-zanahoria-grande-01_11db4b12-79cd-4838-aa51-d09d3dd11d92_1800x1800.jpg?v=1592870597",
           productAmount: 0,
         ),
-        ProductDessert(
+        ProductDesserts(
           productTitle: "Pastel de fresa",
           productSize: DessertSize.CH,
           productDescription:
               "Pan casero de zanahoria con nueces y cálidas especias, cubierto con suave betún de queso crema y decorado con trazos en forma de zanahorias.",
           productImage:
-              "https://cdn.shopify.com/s/files/1/0276/1493/7159/products/pastel-fresa-sin-azucar-01_1800x1800.jpg?v=1592870547",
+              "http://cdn.shopify.com/s/files/1/0276/1493/7159/products/pastel-fresa-sin-azucar-01_1800x1800.jpg?v=1592870547",
           productAmount: 0,
         ),
       ];

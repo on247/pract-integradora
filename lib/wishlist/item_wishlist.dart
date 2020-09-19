@@ -1,29 +1,32 @@
-import 'package:flutter/material.dart';
-import 'package:estructura_practica_1/models/product_hot_drinks.dart';
-import 'package:estructura_practica_1/utils/constants.dart';
-import 'package:estructura_practica_1/models/product_wishlist.dart';
+import 'dart:developer';
 
-class ItemHotDrinks extends StatefulWidget {
-  final ProductHotDrinks drink;
-  final ProductWishlist wishList;
-  ItemHotDrinks({
+import 'package:estructura_practica_1/models/product_wishlist.dart';
+import 'package:flutter/material.dart';
+import 'package:estructura_practica_1/utils/constants.dart';
+
+class ItemWishlist extends StatefulWidget {
+  final ProductWishlist wishlist;
+  final GenericProduct listItem;
+  Function onItemDelete;
+  ItemWishlist({
     Key key,
-    @required this.drink,
-    @required this.wishList,
+    @required this.wishlist,
+    @required this.listItem,
+    @required this.onItemDelete,
   }) : super(key: key);
 
   @override
-  _ItemHotDrinksState createState() => _ItemHotDrinksState();
+  _ItemWishlistState createState() => _ItemWishlistState();
 }
 
-class _ItemHotDrinksState extends State<ItemHotDrinks> {
+class _ItemWishlistState extends State<ItemWishlist> {
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(30, 16, 30, 16),
         child: SizedBox(
-          height: MediaQuery.of(context).size.height / 4,
+          height: MediaQuery.of(context).size.height / 3.5,
           child: Container(
             decoration: BoxDecoration(
               boxShadow: [
@@ -49,11 +52,11 @@ class _ItemHotDrinksState extends State<ItemHotDrinks> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Café",
+                                  "Grano",
                                   style: Theme.of(context).textTheme.headline6,
                                 ),
                                 Text(
-                                  "${widget.drink.productTitle}",
+                                  "${widget.listItem.name}",
                                   style: Theme.of(context).textTheme.headline5,
                                 ),
                                 Expanded(child: Container()),
@@ -61,7 +64,7 @@ class _ItemHotDrinksState extends State<ItemHotDrinks> {
                                   padding:
                                       const EdgeInsets.fromLTRB(0, 0, 0, 16),
                                   child: Text(
-                                    "\$ ${widget.drink.productPrice.toInt()}",
+                                    "\$ ${widget.listItem.price}",
                                     style:
                                         Theme.of(context).textTheme.headline4,
                                   ),
@@ -79,7 +82,7 @@ class _ItemHotDrinksState extends State<ItemHotDrinks> {
                               Expanded(
                                 child: SizedBox(
                                   child: Image.network(
-                                    widget.drink.productImage,
+                                    widget.listItem.image,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -93,19 +96,10 @@ class _ItemHotDrinksState extends State<ItemHotDrinks> {
                   Positioned(
                     right: 0,
                     child: IconButton(
-                      icon: Icon(Icons.thumb_up,
-                          color:
-                              widget.drink.liked ? Colors.white : PRIMARY_TEXT),
+                      icon: Icon(Icons.delete, color: PRIMARY_TEXT),
                       onPressed: () {
-                        setState(() {
-                          if (!widget.drink.liked) {
-                            widget.wishList.addProductDrink(widget.drink);
-                          } else {
-                            widget.wishList
-                                .removeItemByName(widget.drink.productTitle);
-                          }
-                          widget.drink.liked = !widget.drink.liked;
-                        });
+                        widget.wishlist.removeItem(widget.listItem);
+                        widget.onItemDelete();
                       },
                     ),
                   )

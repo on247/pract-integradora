@@ -4,9 +4,12 @@ import 'package:estructura_practica_1/profile.dart';
 import 'package:estructura_practica_1/models/product_repository.dart';
 import 'package:estructura_practica_1/drinks/hot_drinks_page.dart';
 import 'package:estructura_practica_1/grains/grains_page.dart';
+import 'package:estructura_practica_1/desserts/desserts_page.dart';
+import 'package:estructura_practica_1/models/product_wishlist.dart';
 
 class Home extends StatefulWidget {
   final String title;
+
   Home({Key key, this.title}) : super(key: key);
 
   @override
@@ -14,10 +17,36 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final ProductWishlist wishlist = ProductWishlist();
+  HotDrinksPage _hotDrinksPage;
+  DessertsPage _dessertsPage;
+  GrainsPage _grainsPage;
+  _HomeState() {
+    _hotDrinksPage = HotDrinksPage(
+      wishList: wishlist,
+      drinksList: ProductRepository.loadProducts(
+        ProductType.BEBIDAS,
+      ),
+    );
+    _dessertsPage = DessertsPage(
+      wishList: wishlist,
+      dessertsList: ProductRepository.loadProducts(
+        ProductType.POSTRES,
+      ),
+    );
+    _grainsPage = GrainsPage(
+      wishList: wishlist,
+      grainsList: ProductRepository.loadProducts(
+        ProductType.GRANO,
+      ),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Profile(),
+      drawer: Profile(
+        wishlist: wishlist,
+      ),
       appBar: AppBar(
         title: Text(widget.title),
         actions: <Widget>[
@@ -43,9 +72,12 @@ class _HomeState extends State<Home> {
               image: "https://i.imgur.com/5MZocC1.png",
             ),
           ),
-          ItemHome(
-            title: "Postres",
-            image: "https://i.imgur.com/fI7Tezv.png",
+          GestureDetector(
+            onTap: _openDessertPage,
+            child: ItemHome(
+              title: "Postres",
+              image: "https://i.imgur.com/fI7Tezv.png",
+            ),
           ),
           ItemHome(
             // TODO: Al hacer clic, que muestre un snackbar de "Proximamente"
@@ -61,23 +93,17 @@ class _HomeState extends State<Home> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) {
-          return HotDrinksPage(
-            drinksList: ProductRepository.loadProducts(ProductType.BEBIDAS),
-          );
+          return _hotDrinksPage;
         },
       ),
     );
   }
 
-  //TODO : Agregar las demas paginas y gesture detector
-
   void _openGrainsPage() {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) {
-          return GrainsPage(
-            grainsList: ProductRepository.loadProducts(ProductType.GRANO),
-          );
+          return _grainsPage;
         },
       ),
     );
@@ -85,7 +111,11 @@ class _HomeState extends State<Home> {
 
   void _openDessertPage() {
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => null),
+      MaterialPageRoute(
+        builder: (context) {
+          return _dessertsPage;
+        },
+      ),
     );
   }
 }

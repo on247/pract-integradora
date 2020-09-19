@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:estructura_practica_1/models/product_hot_drinks.dart';
+import 'package:estructura_practica_1/models/product_desserts.dart';
 import 'package:estructura_practica_1/utils/constants.dart';
 import 'package:estructura_practica_1/models/product_wishlist.dart';
 
-class ItemHotDrinks extends StatefulWidget {
-  final ProductHotDrinks drink;
+class ItemDesserts extends StatefulWidget {
+  final ProductDesserts dessert;
   final ProductWishlist wishList;
-  ItemHotDrinks({
+  ItemDesserts({
     Key key,
-    @required this.drink,
+    @required this.dessert,
     @required this.wishList,
   }) : super(key: key);
 
   @override
-  _ItemHotDrinksState createState() => _ItemHotDrinksState();
+  _ItemDessertsState createState() => _ItemDessertsState();
 }
 
-class _ItemHotDrinksState extends State<ItemHotDrinks> {
+class _ItemDessertsState extends State<ItemDesserts> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -49,11 +49,7 @@ class _ItemHotDrinksState extends State<ItemHotDrinks> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Café",
-                                  style: Theme.of(context).textTheme.headline6,
-                                ),
-                                Text(
-                                  "${widget.drink.productTitle}",
+                                  "${widget.dessert.productTitle}",
                                   style: Theme.of(context).textTheme.headline5,
                                 ),
                                 Expanded(child: Container()),
@@ -61,7 +57,7 @@ class _ItemHotDrinksState extends State<ItemHotDrinks> {
                                   padding:
                                       const EdgeInsets.fromLTRB(0, 0, 0, 16),
                                   child: Text(
-                                    "\$ ${widget.drink.productPrice.toInt()}",
+                                    "\$ ${widget.dessert.productPrice.toInt()}",
                                     style:
                                         Theme.of(context).textTheme.headline4,
                                   ),
@@ -79,7 +75,7 @@ class _ItemHotDrinksState extends State<ItemHotDrinks> {
                               Expanded(
                                 child: SizedBox(
                                   child: Image.network(
-                                    widget.drink.productImage,
+                                    widget.dessert.productImage,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -94,17 +90,18 @@ class _ItemHotDrinksState extends State<ItemHotDrinks> {
                     right: 0,
                     child: IconButton(
                       icon: Icon(Icons.thumb_up,
-                          color:
-                              widget.drink.liked ? Colors.white : PRIMARY_TEXT),
+                          color: widget.dessert.liked
+                              ? Colors.white
+                              : PRIMARY_TEXT),
                       onPressed: () {
                         setState(() {
-                          if (!widget.drink.liked) {
-                            widget.wishList.addProductDrink(widget.drink);
+                          if (!widget.dessert.liked) {
+                            widget.wishList.addProductDessert(widget.dessert);
                           } else {
                             widget.wishList
-                                .removeItemByName(widget.drink.productTitle);
+                                .removeItemByName(widget.dessert.productTitle);
                           }
-                          widget.drink.liked = !widget.drink.liked;
+                          widget.dessert.liked = !widget.dessert.liked;
                         });
                       },
                     ),

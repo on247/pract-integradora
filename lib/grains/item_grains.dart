@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:estructura_practica_1/models/product_grains.dart';
 import 'package:estructura_practica_1/utils/constants.dart';
+import 'package:estructura_practica_1/models/product_wishlist.dart';
 
 class ItemGrains extends StatefulWidget {
   final ProductGrains grain;
+  final ProductWishlist wishList;
   ItemGrains({
     Key key,
     @required this.grain,
+    @required this.wishList,
   }) : super(key: key);
 
   @override
@@ -97,10 +100,20 @@ class _ItemGrainsState extends State<ItemGrains> {
                   Positioned(
                     right: 0,
                     child: IconButton(
-                      icon: Icon(
-                        Icons.thumb_up,
-                      ),
-                      onPressed: null,
+                      icon: Icon(Icons.thumb_up,
+                          color:
+                              widget.grain.liked ? Colors.white : PRIMARY_TEXT),
+                      onPressed: () {
+                        setState(() {
+                          if (!widget.grain.liked) {
+                            widget.wishList.addProductGrain(widget.grain);
+                          } else {
+                            widget.wishList
+                                .removeItemByName(widget.grain.productTitle);
+                          }
+                          widget.grain.liked = !widget.grain.liked;
+                        });
+                      },
                     ),
                   )
                 ],
