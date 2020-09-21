@@ -15,7 +15,8 @@ class ProductRepository {
         ProductDesserts(
           productTitle: "Pay de limon",
           productSize: DessertSize.CH,
-          productDescription: "Pay de limon con galletas maria, receta clasica",
+          productDescription:
+              "Pay de limon con galletas maria, Pay de limon con galletas maria, receta clasica receta clasica Pay de limon con galletas maria, receta clasica",
           productImage:
               "http://cocinamuyfacil.com/wp-content/uploads/pastel_limon-2.jpg",
           productAmount: 0,

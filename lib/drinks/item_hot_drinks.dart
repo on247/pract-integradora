@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:estructura_practica_1/models/product_hot_drinks.dart';
+import 'package:estructura_practica_1/drinks/item_hot_drinks_details.dart';
 import 'package:estructura_practica_1/utils/constants.dart';
 import 'package:estructura_practica_1/models/product_wishlist.dart';
 
@@ -17,9 +18,23 @@ class ItemHotDrinks extends StatefulWidget {
 }
 
 class _ItemHotDrinksState extends State<ItemHotDrinks> {
+  void openItemPage() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) {
+          return ItemHotDrinksDetails(
+            drink: widget.drink,
+            wishList: widget.wishList,
+          );
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: openItemPage,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(30, 16, 30, 16),
         child: SizedBox(

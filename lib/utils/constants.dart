@@ -20,3 +20,5 @@ const Color PRIMARY_TEXT = Color(0xFF121B22);
 const Color ITEM_TEXT = Color(0xFFFFFFFF);
 const Color ITEM_BACKGROUND = Color(0xFFBCB0A1);
 const Color ITEM_BACKGROUND_DARK = Color(0xFF8B8175);
+const Color ACCENT = Color(0xFFFABF7C);
+const Color ACCENT_DARK = Color(0xFFEC9762);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:estructura_practica_1/models/product_grains.dart';
 import 'package:estructura_practica_1/utils/constants.dart';
 import 'package:estructura_practica_1/models/product_wishlist.dart';
+import 'package:estructura_practica_1/grains/item_grains_details.dart';
 
 class ItemGrains extends StatefulWidget {
   final ProductGrains grain;
@@ -17,9 +18,23 @@ class ItemGrains extends StatefulWidget {
 }
 
 class _ItemGrainsState extends State<ItemGrains> {
+  void openItemPage() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) {
+          return ItemGrainsDetails(
+            grain: widget.grain,
+            wishList: widget.wishList,
+          );
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: openItemPage,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(30, 16, 30, 16),
         child: SizedBox(
