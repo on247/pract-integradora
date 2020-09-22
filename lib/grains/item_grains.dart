@@ -74,7 +74,10 @@ class _ItemGrainsState extends State<ItemGrains> {
                                 ),
                                 Text(
                                   "${widget.grain.productTitle}",
-                                  style: Theme.of(context).textTheme.headline5,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline5
+                                      .copyWith(color: Colors.white),
                                 ),
                                 Text(
                                   widget.grain.productWeight ==

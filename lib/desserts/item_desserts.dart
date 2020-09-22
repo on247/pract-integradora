@@ -73,8 +73,10 @@ class _ItemDessertsState extends State<ItemDesserts> {
                                 children: [
                                   Text(
                                     "${widget.dessert.productTitle}",
-                                    style:
-                                        Theme.of(context).textTheme.headline5,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline5
+                                        .copyWith(color: Colors.white),
                                   ),
                                   Expanded(child: Container()),
                                   Padding(

@@ -74,7 +74,10 @@ class _ItemHotDrinksState extends State<ItemHotDrinks> {
                                 ),
                                 Text(
                                   "${widget.drink.productTitle}",
-                                  style: Theme.of(context).textTheme.headline5,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline5
+                                      .copyWith(color: Colors.white),
                                 ),
                                 Expanded(child: Container()),
                                 Padding(

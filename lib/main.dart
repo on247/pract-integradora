@@ -30,9 +30,15 @@ class MyApp extends StatelessWidget {
         textTheme: Theme.of(context).textTheme.copyWith(
               headline4: Theme.of(context).textTheme.headline4.copyWith(
                     color: PRIMARY_TEXT,
+                    fontFamily: "Akzidenz-Grotesk",
                   ),
               headline5: Theme.of(context).textTheme.headline5.copyWith(
-                    color: ITEM_TEXT,
+                    color: PRIMARY_TEXT,
+                    fontFamily: "Akzidenz-Grotesk",
+                  ),
+              headline6: Theme.of(context).textTheme.headline6.copyWith(
+                    color: PRIMARY_TEXT,
+                    fontFamily: "Akzidenz-Grotesk",
                   ),
             ),
       ),

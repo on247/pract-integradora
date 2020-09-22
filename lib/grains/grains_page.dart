@@ -5,7 +5,6 @@ import 'package:estructura_practica_1/models/product_wishlist.dart';
 import 'package:estructura_practica_1/models/product_cart.dart';
 import 'package:estructura_practica_1/profile.dart';
 import 'package:estructura_practica_1/cart/cart.dart';
-import 'package:estructura_practica_1/models/product_cart.dart';
 
 class GrainsPage extends StatelessWidget {
   final List<ProductGrains> grainsList;
