@@ -7,7 +7,7 @@ import 'package:estructura_practica_1/utils/constants.dart';
 class ItemWishlist extends StatefulWidget {
   final ProductWishlist wishlist;
   final GenericProduct listItem;
-  Function onItemDelete;
+  final Function onItemDelete;
   ItemWishlist({
     Key key,
     @required this.wishlist,

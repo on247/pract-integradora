@@ -5,7 +5,7 @@ const String APP_TITLE = "Cupping";
 // profile
 const String PROFILE_TITLE = "Perfil";
 const String PROFILE_LOGOUT = "Cerrar sesion";
-const String PROFILE_CART = "Lista de compras";
+const String PROFILE_CART = "Carrito de compras";
 const String PROFILE_WISHES = "Lista de deseos";
 const String PROFILE_HISTORY = "Historial de compras";
 const String PROFILE_SETTINGS = "Ajustes";

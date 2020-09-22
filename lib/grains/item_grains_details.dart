@@ -1,3 +1,4 @@
+import 'package:estructura_practica_1/models/product_cart.dart';
 import 'package:flutter/material.dart';
 import 'package:estructura_practica_1/models/product_grains.dart';
 import 'package:estructura_practica_1/utils/constants.dart';
@@ -6,10 +7,12 @@ import 'package:estructura_practica_1/models/product_wishlist.dart';
 class ItemGrainsDetails extends StatefulWidget {
   final ProductGrains grain;
   final ProductWishlist wishList;
+  final ProductCart cart;
   ItemGrainsDetails({
     Key key,
     @required this.grain,
     @required this.wishList,
+    @required this.cart,
   }) : super(key: key);
 
   @override
@@ -59,16 +62,23 @@ class _ItemGrainsDetailsState extends State<ItemGrainsDetails> {
                                     child: IconButton(
                                       icon: Icon(
                                         Icons.thumb_up,
-                                        color: widget.grain.liked
+                                        color: widget.wishList
+                                                .productExistsByName(
+                                                    widget.grain.productTitle)
                                             ? Colors.white
                                             : PRIMARY_TEXT,
                                       ),
                                       onPressed: () {
                                         setState(() {
-                                          widget.grain.liked =
-                                              !widget.grain.liked;
-                                          widget.wishList
-                                              .addProductGrain(widget.grain);
+                                          if (!widget.wishList
+                                              .productExistsByName(
+                                                  widget.grain.productTitle)) {
+                                            widget.wishList
+                                                .addProductGrain(widget.grain);
+                                          } else {
+                                            widget.wishList.removeItemByName(
+                                                widget.grain.productTitle);
+                                          }
                                         });
                                       },
                                     ),
@@ -178,8 +188,21 @@ class _ItemGrainsDetailsState extends State<ItemGrainsDetails> {
                     child: SizedBox(
                       height: 80,
                       child: RaisedButton(
-                        onPressed: () {},
-                        child: Text("AGREGAR AL CARRITO"),
+                        onPressed: () {
+                          setState(() {
+                            if (!widget.cart.productExistsByName(
+                                widget.grain.productTitle)) {
+                              widget.cart.addProductGrain(widget.grain);
+                            } else {
+                              widget.cart
+                                  .removeItemByName(widget.grain.productTitle);
+                            }
+                          });
+                        },
+                        child: Text(widget.cart
+                                .productExistsByName(widget.grain.productTitle)
+                            ? "AGREGADO AL CARRITO"
+                            : "AGREGAR AL CARRITO"),
                       ),
                     ),
                   ),

@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:estructura_practica_1/models/product_desserts.dart';
 import 'package:estructura_practica_1/utils/constants.dart';
 import 'package:estructura_practica_1/models/product_wishlist.dart';
+import 'package:estructura_practica_1/models/product_cart.dart';
 
 class ItemDessertsDetails extends StatefulWidget {
   final ProductDesserts dessert;
   final ProductWishlist wishList;
+  final ProductCart cart;
   ItemDessertsDetails({
     Key key,
     @required this.dessert,
     @required this.wishList,
+    @required this.cart,
   }) : super(key: key);
 
   @override
@@ -59,16 +62,23 @@ class _ItemDessertsDetailsState extends State<ItemDessertsDetails> {
                                     child: IconButton(
                                       icon: Icon(
                                         Icons.thumb_up,
-                                        color: widget.dessert.liked
+                                        color: widget.wishList
+                                                .productExistsByName(
+                                                    widget.dessert.productTitle)
                                             ? Colors.white
                                             : PRIMARY_TEXT,
                                       ),
                                       onPressed: () {
                                         setState(() {
-                                          widget.dessert.liked =
-                                              !widget.dessert.liked;
-                                          widget.wishList.addProductDessert(
-                                              widget.dessert);
+                                          if (!widget.wishList
+                                              .productExistsByName(widget
+                                                  .dessert.productTitle)) {
+                                            widget.wishList.addProductDessert(
+                                                widget.dessert);
+                                          } else {
+                                            widget.wishList.removeItemByName(
+                                                widget.dessert.productTitle);
+                                          }
                                         });
                                       },
                                     ),
@@ -199,8 +209,21 @@ class _ItemDessertsDetailsState extends State<ItemDessertsDetails> {
                     child: SizedBox(
                       height: 80,
                       child: RaisedButton(
-                        onPressed: () {},
-                        child: Text("AGREGAR AL CARRITO"),
+                        onPressed: () {
+                          setState(() {
+                            if (!widget.cart.productExistsByName(
+                                widget.dessert.productTitle)) {
+                              widget.cart.addProductDessert(widget.dessert);
+                            } else {
+                              widget.cart.removeItemByName(
+                                  widget.dessert.productTitle);
+                            }
+                          });
+                        },
+                        child: Text(widget.cart.productExistsByName(
+                                widget.dessert.productTitle)
+                            ? "AGREGADO AL CARRITO"
+                            : "AGREGAR AL CARRITO"),
                       ),
                     ),
                   ),

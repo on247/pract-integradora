@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:estructura_practica_1/models/product_desserts.dart';
 import 'package:estructura_practica_1/utils/constants.dart';
 import 'package:estructura_practica_1/models/product_wishlist.dart';
+import 'package:estructura_practica_1/models/product_cart.dart';
 
 class ItemDesserts extends StatefulWidget {
   final ProductDesserts dessert;
   final ProductWishlist wishList;
+  final ProductCart cart;
   ItemDesserts({
     Key key,
     @required this.dessert,
+    @required this.cart,
     @required this.wishList,
   }) : super(key: key);
 
@@ -18,17 +21,19 @@ class ItemDesserts extends StatefulWidget {
 }
 
 class _ItemDessertsState extends State<ItemDesserts> {
-  void openItemPage(ProductDesserts item) {
-    Navigator.of(context).push(
+  void openItemPage(ProductDesserts item) async {
+    await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) {
           return ItemDessertsDetails(
             dessert: widget.dessert,
             wishList: widget.wishList,
+            cart: widget.cart,
           );
         },
       ),
     );
+    setState(() {});
   }
 
   @override
@@ -109,18 +114,19 @@ class _ItemDessertsState extends State<ItemDesserts> {
                       right: 0,
                       child: IconButton(
                         icon: Icon(Icons.thumb_up,
-                            color: widget.dessert.liked
+                            color: widget.wishList.productExistsByName(
+                                    widget.dessert.productTitle)
                                 ? Colors.white
                                 : PRIMARY_TEXT),
                         onPressed: () {
                           setState(() {
-                            if (!widget.dessert.liked) {
+                            if (!widget.wishList.productExistsByName(
+                                widget.dessert.productTitle)) {
                               widget.wishList.addProductDessert(widget.dessert);
                             } else {
                               widget.wishList.removeItemByName(
                                   widget.dessert.productTitle);
                             }
-                            widget.dessert.liked = !widget.dessert.liked;
                           });
                         },
                       ),

@@ -1,3 +1,5 @@
+import 'package:estructura_practica_1/models/product_cart.dart';
+import 'package:estructura_practica_1/cart/cart.dart';
 import 'package:estructura_practica_1/models/product_wishlist.dart';
 import 'package:estructura_practica_1/wishlist/wishlist_page.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +7,12 @@ import 'package:estructura_practica_1/utils/constants.dart';
 
 class Profile extends StatelessWidget {
   final ProductWishlist wishlist;
-  const Profile({Key key, @required this.wishlist}) : super(key: key);
+  final ProductCart cart;
+  const Profile({
+    Key key,
+    @required this.wishlist,
+    @required this.cart,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +63,18 @@ class Profile extends StatelessWidget {
                 ListTile(
                   title: Text(PROFILE_CART),
                   leading: Icon(Icons.shopping_cart),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return Cart(
+                            cart: cart,
+                            wishlist: wishlist,
+                          );
+                        },
+                      ),
+                    );
+                  },
                 ),
                 ListTile(
                   title: Text(PROFILE_WISHES),

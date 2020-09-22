@@ -3,12 +3,15 @@ import 'package:estructura_practica_1/models/product_grains.dart';
 import 'package:estructura_practica_1/utils/constants.dart';
 import 'package:estructura_practica_1/models/product_wishlist.dart';
 import 'package:estructura_practica_1/grains/item_grains_details.dart';
+import 'package:estructura_practica_1/models/product_cart.dart';
 
 class ItemGrains extends StatefulWidget {
   final ProductGrains grain;
   final ProductWishlist wishList;
+  final ProductCart cart;
   ItemGrains({
     Key key,
+    @required this.cart,
     @required this.grain,
     @required this.wishList,
   }) : super(key: key);
@@ -18,17 +21,19 @@ class ItemGrains extends StatefulWidget {
 }
 
 class _ItemGrainsState extends State<ItemGrains> {
-  void openItemPage() {
-    Navigator.of(context).push(
+  void openItemPage() async {
+    await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) {
           return ItemGrainsDetails(
             grain: widget.grain,
             wishList: widget.wishList,
+            cart: widget.cart,
           );
         },
       ),
     );
+    setState(() {});
   }
 
   @override
@@ -115,18 +120,22 @@ class _ItemGrainsState extends State<ItemGrains> {
                   Positioned(
                     right: 0,
                     child: IconButton(
-                      icon: Icon(Icons.thumb_up,
-                          color:
-                              widget.grain.liked ? Colors.white : PRIMARY_TEXT),
+                      icon: Icon(
+                        Icons.thumb_up,
+                        color: widget.wishList
+                                .productExistsByName(widget.grain.productTitle)
+                            ? Colors.white
+                            : PRIMARY_TEXT,
+                      ),
                       onPressed: () {
                         setState(() {
-                          if (!widget.grain.liked) {
+                          if (!widget.wishList
+                              .productExistsByName(widget.grain.productTitle)) {
                             widget.wishList.addProductGrain(widget.grain);
                           } else {
                             widget.wishList
                                 .removeItemByName(widget.grain.productTitle);
                           }
-                          widget.grain.liked = !widget.grain.liked;
                         });
                       },
                     ),

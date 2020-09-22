@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:estructura_practica_1/desserts/item_desserts.dart';
 import 'package:estructura_practica_1/models/product_desserts.dart';
 import 'package:estructura_practica_1/models/product_wishlist.dart';
+import 'package:estructura_practica_1/models/product_cart.dart';
 
 class DessertsPage extends StatelessWidget {
   final List<ProductDesserts> dessertsList;
   final ProductWishlist wishList;
-  DessertsPage({Key key, @required this.dessertsList, @required this.wishList})
-      : super(key: key);
+  final ProductCart cart;
+  DessertsPage({
+    Key key,
+    @required this.dessertsList,
+    @required this.wishList,
+    @required this.cart,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +26,7 @@ class DessertsPage extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return ItemDesserts(
             wishList: wishList,
+            cart: cart,
             dessert: dessertsList[index],
           );
         },

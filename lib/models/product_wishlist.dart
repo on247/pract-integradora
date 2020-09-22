@@ -2,6 +2,7 @@ import 'package:estructura_practica_1/models/product_hot_drinks.dart';
 import 'package:estructura_practica_1/models/product_grains.dart';
 import 'package:estructura_practica_1/models/product_desserts.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:estructura_practica_1/models/product_item_cart.dart';
 
 class GenericProduct {
   dynamic product;
@@ -29,6 +30,16 @@ class ProductWishlist {
     GenericProduct addedProduct = GenericProduct(
       name: item.productTitle,
       description: item.productDescription,
+      image: item.productImage,
+      price: item.productPrice,
+    );
+    products.add(addedProduct);
+  }
+
+  void addCartProduct(ProductItemCart item) {
+    GenericProduct addedProduct = GenericProduct(
+      name: item.productTitle,
+      description: "",
       image: item.productImage,
       price: item.productPrice,
     );
@@ -65,6 +76,19 @@ class ProductWishlist {
 
   void removeItem(GenericProduct item) {
     products.remove(item);
+  }
+
+  bool productExistsByName(String name) {
+    for (var i = 0; i < products.length; i++) {
+      if (products[i].name == name) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  bool productExists(GenericProduct item) {
+    return products.indexOf(item) != -1;
   }
 
   List<GenericProduct> productList() {

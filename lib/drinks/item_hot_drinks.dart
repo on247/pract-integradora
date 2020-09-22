@@ -1,3 +1,4 @@
+import 'package:estructura_practica_1/models/product_cart.dart';
 import 'package:flutter/material.dart';
 import 'package:estructura_practica_1/models/product_hot_drinks.dart';
 import 'package:estructura_practica_1/drinks/item_hot_drinks_details.dart';
@@ -7,28 +8,32 @@ import 'package:estructura_practica_1/models/product_wishlist.dart';
 class ItemHotDrinks extends StatefulWidget {
   final ProductHotDrinks drink;
   final ProductWishlist wishList;
-  ItemHotDrinks({
-    Key key,
-    @required this.drink,
-    @required this.wishList,
-  }) : super(key: key);
+  final ProductCart cart;
+  ItemHotDrinks(
+      {Key key,
+      @required this.drink,
+      @required this.wishList,
+      @required this.cart})
+      : super(key: key);
 
   @override
   _ItemHotDrinksState createState() => _ItemHotDrinksState();
 }
 
 class _ItemHotDrinksState extends State<ItemHotDrinks> {
-  void openItemPage() {
-    Navigator.of(context).push(
+  void openItemPage() async {
+    await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) {
           return ItemHotDrinksDetails(
             drink: widget.drink,
+            cart: widget.cart,
             wishList: widget.wishList,
           );
         },
       ),
     );
+    setState(() {});
   }
 
   @override
@@ -109,17 +114,19 @@ class _ItemHotDrinksState extends State<ItemHotDrinks> {
                     right: 0,
                     child: IconButton(
                       icon: Icon(Icons.thumb_up,
-                          color:
-                              widget.drink.liked ? Colors.white : PRIMARY_TEXT),
+                          color: widget.wishList.productExistsByName(
+                                  widget.drink.productTitle)
+                              ? Colors.white
+                              : PRIMARY_TEXT),
                       onPressed: () {
                         setState(() {
-                          if (!widget.drink.liked) {
+                          if (!widget.wishList
+                              .productExistsByName(widget.drink.productTitle)) {
                             widget.wishList.addProductDrink(widget.drink);
                           } else {
                             widget.wishList
                                 .removeItemByName(widget.drink.productTitle);
                           }
-                          widget.drink.liked = !widget.drink.liked;
                         });
                       },
                     ),

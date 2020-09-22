@@ -1,3 +1,4 @@
+import 'package:estructura_practica_1/models/product_cart.dart';
 import 'package:flutter/material.dart';
 import 'package:estructura_practica_1/home/item_home.dart';
 import 'package:estructura_practica_1/profile.dart';
@@ -18,24 +19,28 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final ProductWishlist wishlist = ProductWishlist();
+  final ProductCart cart = ProductCart();
   HotDrinksPage _hotDrinksPage;
   DessertsPage _dessertsPage;
   GrainsPage _grainsPage;
   _HomeState() {
     _hotDrinksPage = HotDrinksPage(
       wishList: wishlist,
+      cart: cart,
       drinksList: ProductRepository.loadProducts(
         ProductType.BEBIDAS,
       ),
     );
     _dessertsPage = DessertsPage(
       wishList: wishlist,
+      cart: cart,
       dessertsList: ProductRepository.loadProducts(
         ProductType.POSTRES,
       ),
     );
     _grainsPage = GrainsPage(
       wishList: wishlist,
+      cart: cart,
       grainsList: ProductRepository.loadProducts(
         ProductType.GRANO,
       ),
@@ -45,6 +50,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Profile(
+        cart: cart,
         wishlist: wishlist,
       ),
       appBar: AppBar(

@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:estructura_practica_1/models/product_hot_drinks.dart';
 import 'package:estructura_practica_1/utils/constants.dart';
 import 'package:estructura_practica_1/models/product_wishlist.dart';
+import 'package:estructura_practica_1/models/product_cart.dart';
 
 class ItemHotDrinksDetails extends StatefulWidget {
   final ProductHotDrinks drink;
   final ProductWishlist wishList;
+  final ProductCart cart;
   ItemHotDrinksDetails({
     Key key,
     @required this.drink,
+    @required this.cart,
     @required this.wishList,
   }) : super(key: key);
 
@@ -60,17 +63,24 @@ class _ItemHotDrinksDetailsState extends State<ItemHotDrinksDetails> {
                                     child: IconButton(
                                       icon: Icon(
                                         Icons.thumb_up,
-                                        color: widget.drink.liked
+                                        color: widget.wishList
+                                                .productExistsByName(
+                                                    widget.drink.productTitle)
                                             ? Colors.white
                                             : PRIMARY_TEXT,
                                       ),
                                       onPressed: () {
                                         setState(
                                           () {
-                                            widget.drink.liked =
-                                                !widget.drink.liked;
-                                            widget.wishList
-                                                .addProductDrink(widget.drink);
+                                            if (!widget.wishList
+                                                .productExistsByName(widget
+                                                    .drink.productTitle)) {
+                                              widget.wishList.addProductDrink(
+                                                  widget.drink);
+                                            } else {
+                                              widget.wishList.removeItemByName(
+                                                  widget.drink.productTitle);
+                                            }
                                           },
                                         );
                                       },
@@ -199,8 +209,21 @@ class _ItemHotDrinksDetailsState extends State<ItemHotDrinksDetails> {
                     child: SizedBox(
                       height: 80,
                       child: RaisedButton(
-                        onPressed: () {},
-                        child: Text("AGREGAR AL CARRITO"),
+                        onPressed: () {
+                          setState(() {
+                            if (!widget.cart.productExistsByName(
+                                widget.drink.productTitle)) {
+                              widget.cart.addProductDrink(widget.drink);
+                            } else {
+                              widget.cart
+                                  .removeItemByName(widget.drink.productTitle);
+                            }
+                          });
+                        },
+                        child: Text(widget.cart
+                                .productExistsByName(widget.drink.productTitle)
+                            ? "AGREGADO AL CARRITO"
+                            : "AGREGAR AL CARRITO"),
                       ),
                     ),
                   ),
