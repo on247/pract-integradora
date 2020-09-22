@@ -3,6 +3,8 @@ import 'package:estructura_practica_1/models/product_hot_drinks.dart';
 import 'package:estructura_practica_1/utils/constants.dart';
 import 'package:estructura_practica_1/models/product_wishlist.dart';
 import 'package:estructura_practica_1/models/product_cart.dart';
+import 'package:estructura_practica_1/profile.dart';
+import 'package:estructura_practica_1/cart/cart.dart';
 
 class ItemHotDrinksDetails extends StatefulWidget {
   final ProductHotDrinks drink;
@@ -23,8 +25,23 @@ class _ItemHotDrinksDetailsState extends State<ItemHotDrinksDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Profile(wishlist: widget.wishList, cart: widget.cart),
       appBar: AppBar(
         title: Text(widget.drink.productTitle),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.shopping_cart),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return Cart(wishlist: widget.wishList, cart: widget.cart);
+                  },
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: Column(
         children: [

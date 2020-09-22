@@ -3,6 +3,9 @@ import 'package:estructura_practica_1/grains/item_grains.dart';
 import 'package:estructura_practica_1/models/product_grains.dart';
 import 'package:estructura_practica_1/models/product_wishlist.dart';
 import 'package:estructura_practica_1/models/product_cart.dart';
+import 'package:estructura_practica_1/profile.dart';
+import 'package:estructura_practica_1/cart/cart.dart';
+import 'package:estructura_practica_1/models/product_cart.dart';
 
 class GrainsPage extends StatelessWidget {
   final List<ProductGrains> grainsList;
@@ -18,8 +21,23 @@ class GrainsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Profile(wishlist: wishList, cart: cart),
       appBar: AppBar(
         title: Text("Granos"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.shopping_cart),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return Cart(wishlist: wishList, cart: cart);
+                  },
+                ),
+              );
+            },
+          )
+        ],
       ),
       body: ListView.builder(
         itemCount: grainsList.length,
