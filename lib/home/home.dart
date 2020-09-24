@@ -94,10 +94,15 @@ class _HomeState extends State<Home> {
               image: "https://i.imgur.com/fI7Tezv.png",
             ),
           ),
-          ItemHome(
-            // TODO: Al hacer clic, que muestre un snackbar de "Proximamente"
-            title: "Tazas",
-            image: "https://i.imgur.com/fMjtSpy.png",
+          GestureDetector(
+            onTap: () {
+              final snackBar = SnackBar(content: Text('Proximamente..'));
+              Scaffold.of(context).showSnackBar(snackBar);
+            },
+            child: ItemHome(
+              title: "Tazas",
+              image: "https://i.imgur.com/fMjtSpy.png",
+            ),
           ),
         ],
       ),
