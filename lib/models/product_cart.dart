@@ -6,10 +6,56 @@ import 'package:estructura_practica_1/models/product_desserts.dart';
 import 'package:estructura_practica_1/models/product_item_cart.dart';
 import 'package:flutter/cupertino.dart';
 
+class ProductHistoryEntry {
+  DateTime purchaseDate;
+  List<ProductItemCart> products;
+  int totalProducts;
+  double totalPrice;
+
+  ProductHistoryEntry({
+    @required this.purchaseDate,
+    @required this.products,
+    @required this.totalProducts,
+    @required this.totalPrice,
+  });
+}
+
 class ProductCart {
   List<ProductItemCart> products;
+  List<ProductHistoryEntry> history;
   ProductCart() {
+    this.history = new List<ProductHistoryEntry>();
     this.products = new List<ProductItemCart>();
+  }
+
+  void clear() {
+    this.products = new List<ProductItemCart>();
+  }
+
+  List<ProductHistoryEntry> getHistory() {
+    return history;
+  }
+
+  void checkoutProduct(ProductItemCart product) {
+    ProductHistoryEntry entry = ProductHistoryEntry(
+      purchaseDate: DateTime.now(),
+      products: [product],
+      totalProducts: 1,
+      totalPrice: product.productPrice,
+    );
+    history.add(entry);
+    clear();
+  }
+
+  void checkoutCart() {
+    ProductHistoryEntry entry = ProductHistoryEntry(
+      purchaseDate: DateTime.now(),
+      products: this.products,
+      totalProducts: this.products.length,
+      totalPrice: this.cartTotal(),
+    );
+    history.add(entry);
+    clear();
   }
 
   void addProductDrink(ProductHotDrinks item) {

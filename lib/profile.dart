@@ -1,3 +1,5 @@
+import 'package:estructura_practica_1/history/history_page.dart';
+import 'package:estructura_practica_1/home/home.dart';
 import 'package:estructura_practica_1/models/product_cart.dart';
 import 'package:estructura_practica_1/cart/cart.dart';
 import 'package:estructura_practica_1/models/product_wishlist.dart';
@@ -92,12 +94,30 @@ class Profile extends StatelessWidget {
                 ListTile(
                   title: Text(PROFILE_HISTORY),
                   leading: Icon(Icons.store),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return HistoryPage(cart: cart, wishList: wishlist);
+                        },
+                      ),
+                    );
+                  },
                 ),
                 ListTile(
-                  title: Text(PROFILE_SETTINGS),
-                  leading: Icon(Icons.settings),
-                  onTap: () {},
+                  title: Text("Productos"),
+                  leading: Icon(Icons.local_drink),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return Home(
+                            title: APP_TITLE,
+                          );
+                        },
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

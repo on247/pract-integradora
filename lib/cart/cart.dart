@@ -1,4 +1,5 @@
 import 'package:estructura_practica_1/models/product_cart.dart';
+import 'package:estructura_practica_1/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:estructura_practica_1/cart/item_cart.dart';
 import 'package:estructura_practica_1/models/product_wishlist.dart';
@@ -71,7 +72,19 @@ class _CartState extends State<Cart> {
                         child: Padding(
                           padding: const EdgeInsets.all(20.0),
                           child: RaisedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return PaymentPage(
+                                      type: PaymentType.PAY_CART,
+                                      wishList: widget.wishlist,
+                                      cart: widget.cart,
+                                    );
+                                  },
+                                ),
+                              );
+                            },
                             child: Text("Comprar"),
                           ),
                         ),

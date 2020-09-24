@@ -27,6 +27,11 @@ class PaymentPage extends StatefulWidget {
 
 class _PaymentPageState extends State<PaymentPage> {
   void pay(context) {
+    if (widget.type == PaymentType.PAY_ITEM) {
+      widget.cart.checkoutProduct(widget.product);
+    } else {
+      widget.cart.checkoutCart();
+    }
     showDialog(
         context: context,
         builder: (BuildContext context) {
