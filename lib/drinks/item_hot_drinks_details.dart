@@ -5,6 +5,7 @@ import 'package:estructura_practica_1/models/product_wishlist.dart';
 import 'package:estructura_practica_1/models/product_cart.dart';
 import 'package:estructura_practica_1/profile.dart';
 import 'package:estructura_practica_1/cart/cart.dart';
+import 'package:estructura_practica_1/payment.dart';
 
 class ItemHotDrinksDetails extends StatefulWidget {
   final ProductHotDrinks drink;
@@ -251,7 +252,23 @@ class _ItemHotDrinksDetailsState extends State<ItemHotDrinksDetails> {
                     child: SizedBox(
                       height: 80,
                       child: RaisedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                widget.cart.addProductDrink(widget.drink);
+                                return PaymentPage(
+                                  type: PaymentType.PAY_ITEM,
+                                  wishList: widget.wishList,
+                                  cart: widget.cart,
+                                  product: widget.cart.getItemByName(
+                                    widget.drink.productTitle,
+                                  ),
+                                );
+                              },
+                            ),
+                          );
+                        },
                         child: Text("COMPRAR AHORA"),
                       ),
                     ),

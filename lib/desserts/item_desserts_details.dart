@@ -1,3 +1,4 @@
+import 'package:estructura_practica_1/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:estructura_practica_1/models/product_desserts.dart';
 import 'package:estructura_practica_1/utils/constants.dart';
@@ -251,7 +252,23 @@ class _ItemDessertsDetailsState extends State<ItemDessertsDetails> {
                     child: SizedBox(
                       height: 80,
                       child: RaisedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                widget.cart.addProductDessert(widget.dessert);
+                                return PaymentPage(
+                                  type: PaymentType.PAY_ITEM,
+                                  wishList: widget.wishList,
+                                  cart: widget.cart,
+                                  product: widget.cart.getItemByName(
+                                    widget.dessert.productTitle,
+                                  ),
+                                );
+                              },
+                            ),
+                          );
+                        },
                         child: Text("COMPRAR AHORA"),
                       ),
                     ),

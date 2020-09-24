@@ -6,6 +6,8 @@ import 'package:estructura_practica_1/models/product_wishlist.dart';
 import 'package:estructura_practica_1/profile.dart';
 import 'package:estructura_practica_1/cart/cart.dart';
 
+import 'package:estructura_practica_1/payment.dart';
+
 class ItemGrainsDetails extends StatefulWidget {
   final ProductGrains grain;
   final ProductWishlist wishList;
@@ -230,7 +232,23 @@ class _ItemGrainsDetailsState extends State<ItemGrainsDetails> {
                     child: SizedBox(
                       height: 80,
                       child: RaisedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                widget.cart.addProductGrain(widget.grain);
+                                return PaymentPage(
+                                  type: PaymentType.PAY_ITEM,
+                                  wishList: widget.wishList,
+                                  cart: widget.cart,
+                                  product: widget.cart.getItemByName(
+                                    widget.grain.productTitle,
+                                  ),
+                                );
+                              },
+                            ),
+                          );
+                        },
                         child: Text("COMPRAR AHORA"),
                       ),
                     ),
